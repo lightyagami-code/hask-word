@@ -74,28 +74,120 @@ cabal build
 cabal run
 ```
 
-## How to Play
 
-### Game Mode
-1. Select "game" when prompted for mode
-2. Choose difficulty:
-   - Easy: Shows used letters, validates words, no penalties
-   - Standard: Classic Wordle rules
-   - Hard: One intentionally misleading hint per game
-3. Enter word length when prompted
-4. Make your guesses and receive feedback:
-   - 🟩 Green: Correct letter, correct position
-   - 🟨 Yellow: Correct letter, wrong position
-   - ⬜ Gray: Letter not in word
+## Game Rules & Modes
 
-### Assistant Mode
-1. Select "helper" when prompted for mode
-2. Enter the length of your secret word
-3. The AI will make guesses
-4. Provide feedback using:
-   - 'g' for Green (correct position)
-   - 'y' for Yellow (wrong position)
-   - 'o' for Gray (not in word)
+### 🎮 Game Mode
+
+In Game Mode, you try to guess a hidden word. The game offers three difficulty levels:
+
+#### 1. Easy Mode
+- You get 6 attempts to guess the word
+- Helpful features:
+  - Shows all letters you've already used
+  - Displays which letters are definitely in the word
+  - Shows correctly placed letters' positions
+  - Prevents using letters already marked as not in the word
+  - Prevents making guesses that don't use already discovered correct letters
+  - All guesses must be valid dictionary words
+- Perfect for learning the game mechanics and practicing
+
+#### 2. Standard Mode (Classic)
+- 6 attempts to guess the word
+- Features:
+  - Standard color feedback only (🟩, 🟨, ⬜)
+  - Must be valid dictionary words
+  - No additional hints or restrictions
+
+#### 3. Hard Mode
+- 6 attempts to guess the word
+- Additional challenge:
+  - One randomly chosen feedback during the game will be intentionally wrong
+  - The lie will change one square's color to a different color
+  - You won't know which guess contains the lie
+  - Must be valid dictionary words
+- Tests your deduction skills and ability to spot inconsistencies
+
+### Color Feedback System
+For all modes:
+- 🟩 Green: Correct letter in correct position
+- 🟨 Yellow: Letter exists in word but wrong position
+- ⬜ Gray: Letter not in word at all
+
+### 🤖 Assistant Mode
+
+A helper mode designed to assist you in solving Wordle puzzles from any source:
+
+#### How to Use
+1. Start playing any Wordle puzzle you want help with
+2. Tell the assistant your puzzle's word length
+3. The assistant will suggest words to try
+4. After each suggestion:
+   - Enter the suggested word in your actual Wordle game
+   - Look at the colored squares you get
+   - Translate the colors to letters for the assistant:
+     - 'g' for 🟩 (Green)
+     - 'y' for 🟨 (Yellow)
+     - 'o' for ⬜ (Gray)
+   - Example: 
+     - If you see: 🟩⬜🟨🟨⬜
+     - Type: 'goyyo'
+
+#### Assistant Strategy
+- Uses an intelligent algorithm to:
+  - Track all possible remaining words
+  - Eliminate impossible words based on feedback
+  - Suggest optimal guesses to narrow down possibilities
+- Always suggests valid dictionary words
+- Learns from each guess to make better subsequent suggestions
+
+## Example Game Sessions
+
+### Standard Mode Example:
+```
+Select mode ('game', 'helper'): game
+Select difficulty ('standard'): standard
+Enter word length: 5
+Enter guess (Attempts left: 6): smart
+🟨⬜🟩⬜🟨
+Enter guess (Attempts left: 5): trace
+🟩⬜🟩⬜⬜
+...
+```
+
+### Easy Mode Example:
+```
+Select mode ('game', 'helper'): game
+Select difficulty ('easy'): easy
+Enter word length: 5
+Currently used letters: 
+Enter guess (Attempts left: 6): smart
+🟨⬜🟩⬜🟨
+Currently used letters: s m a r t
+Currently guessed letters: s a t
+Currently fixed letters: _ _ a _ t
+...
+```
+
+### Hard Mode Example:
+```
+Select mode ('game', 'helper'): game
+Select difficulty ('hard'): hard
+Enter word length: 5
+Enter guess (Attempts left: 6): smart
+🟨⬜🟩⬜⬜  (This could be the lie!)
+...
+```
+
+### Assistant Mode Example:
+```
+Select mode ('game', 'helper'): helper
+Enter word length: 5
+My guess is "smart"
+Enter colors (g == Green, y == Yellow, o == Gray): goyyo
+My next guess is "stare"
+...
+```
 
 ## Requirements
 
