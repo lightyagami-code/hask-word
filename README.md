@@ -12,6 +12,9 @@ An enhanced implementation of word game in terminal using Haskell featuring mult
 - 📏 Customizable word length
 - 📚 Extensive dictionary support
 
+## Video Demo
+[Haskword Demo](https://drive.google.com/file/d/1RVRa-sXLPdZmY8wYVK5hGOBKNPZ1aGeo/view?usp=sharing)
+
 ## Installation Guide
 
 ### Windows
