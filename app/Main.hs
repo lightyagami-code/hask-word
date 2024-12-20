@@ -416,11 +416,17 @@ evaluateGuessedLetters guess@(x:xs) answer@(y:ys) z
 
 evaluateFixedLetters ::  String -> String -> String -> [Char]
 evaluateFixedLetters [] _ z = z
-evaluateFixedLetters guess@(x:xs) answer@(y:ys) fixedLetters@(z:zs) =
-  if y == 'g'
-    then x : evaluateFixedLetters xs ys zs
-  else '?' : evaluateFixedLetters xs ys zs
+evaluateFixedLetters _ [] z = z  -- Handle empty answer string
+evaluateFixedLetters _ _ [] = []  -- Handle empty fixed letters string
+evaluateFixedLetters (x:xs) (y:ys) (z:zs)
+  | y == 'g' = x : evaluateFixedLetters xs ys zs
+  | otherwise = '?' : evaluateFixedLetters xs ys zs
 
-gameWonHelper :: [Char] -> Int -> Bool
-gameWonHelper _ 0 = True
-gameWonHelper (x:xs) n = (x == 'g') && gameWonHelper xs (n - 1)
+gameWonHelper :: String -> Int -> Bool
+gameWonHelper [] 0 = True
+gameWonHelper [] _ = False
+gameWonHelper _ 0 = False
+gameWonHelper (x:xs) n 
+    | n < 0 = False
+    | x == 'g' = gameWonHelper xs (n-1)
+    | otherwise = False
