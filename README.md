@@ -1,6 +1,6 @@
 # HaskWord
 
-An enhanced implementation of word game in Haskell featuring multiple game modes and an AI assistant.
+An enhanced implementation of word game in terminal using Haskell featuring multiple game modes and an AI assistant.
 
 ## Features
 
@@ -23,8 +23,8 @@ An enhanced implementation of word game in Haskell featuring multiple game modes
 
 2. Clone or download the repository:
 ```cmd
-git clone [your-repository-url]
-cd wordle-haskell
+git clone https://github.com/lightyagami-code/hask-word.git
+cd hask-word
 ```
 
 3. Verify installation:
@@ -48,17 +48,10 @@ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 export PATH="$HOME/.ghcup/bin:$PATH"
 ```
 
-2. Install specific GHC version and Cabal:
+2. Clone the repository:
 ```bash
-ghcup install ghc 9.4.7
-ghcup install cabal 3.0.0.0
-ghcup set ghc 9.4.7
-```
-
-3. Clone the repository:
-```bash
-git clone [your-repository-url]
-cd wordle-haskell
+git clone https://github.com/lightyagami-code/hask-word.git
+cd hask-word
 ```
 
 ## Building and Running
@@ -118,12 +111,11 @@ cabal run
 
 ## Project Structure
 ```
-wordle-haskell/
+haskword/
 ├── app/
 │   └── Main.hs       # Main game logic
 ├── dictionary.txt    # Word dictionary
-├── cabal.project
-└── wordle.cabal
+└── project.cabal
 ```
 
 ## Troubleshooting

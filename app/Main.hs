@@ -28,13 +28,13 @@ main = do
 
 handleGameMode :: Int -> [String] -> IO ()
 handleGameMode attemptsCount dictionary = do
-  putStrLn "Select difficulty ('easy', 'standart', 'hard'): "
+  putStrLn "Select difficulty ('easy', 'standard', 'hard'): "
   difficulty <- getLine
   case difficulty of
     "easy" -> handleEasyMode attemptsCount dictionary
-    "standart" -> handleStandartMode attemptsCount dictionary
+    "standard" -> handleStandardMode attemptsCount dictionary
     "hard" -> handleHardMode attemptsCount dictionary
-    _ -> putStrLn "Invalid difficulty. Please select 'easy', 'standart', or 'hard'"
+    _ -> putStrLn "Invalid difficulty. Please select 'easy', 'standard', or 'hard'"
 
 handleEasyMode :: Int -> [String] -> IO ()
 handleEasyMode attemptsCount dictionary = do
@@ -50,8 +50,8 @@ handleEasyMode attemptsCount dictionary = do
           word <- generateRandomWord filteredDict
           easyMode word attemptsCount lengthOfWord [] []
 
-handleStandartMode :: Int -> [String] -> IO ()
-handleStandartMode attemptsCount dictionary = do
+handleStandardMode :: Int -> [String] -> IO ()
+handleStandardMode attemptsCount dictionary = do
   maybeLengthOfWord <- getValidWordLength
   case maybeLengthOfWord of
     Nothing -> putStrLn "Invalid word length"
@@ -62,7 +62,7 @@ handleStandartMode attemptsCount dictionary = do
         else do
           putStrLn "Generating word... "
           word <- generateRandomWord filteredDict
-          standartMode word attemptsCount lengthOfWord
+          standardMode word attemptsCount lengthOfWord
 
 handleHardMode :: Int -> [String] -> IO ()
 handleHardMode attemptsCount dictionary = do
@@ -149,14 +149,14 @@ gameWon = foldr (\ x -> (&&) (x == Green)) True
 
 -----------------------------------------------------------------_GAME_MODES_-----------------------------------------------------------------
 
-standartMode :: String -> Int -> Int -> IO ()
-standartMode [] _ _ = do
+standardMode :: String -> Int -> Int -> IO ()
+standardMode [] _ _ = do
   putStrLn "Invalid word"
 
-standartMode word 0 _ = do
+standardMode word 0 _ = do
   putStrLn $ "Game over! The word was " ++ word
 
-standartMode word n lengthOfWord = do
+standardMode word n lengthOfWord = do
   putStrLn $ "Enter guess (Attempts left: " ++ show n ++ "): "
   guess <- getLine
 
@@ -167,13 +167,13 @@ standartMode word n lengthOfWord = do
   if length guess /= lengthOfWord
     then do
       putStrLn $ "Enter " ++ show lengthOfWord ++ " characters!"
-      standartMode word n lengthOfWord
+      standardMode word n lengthOfWord
   else do
     let answer = colorConnection word guess word
     putStrLn $ map toEmoji answer
 
     if gameWon answer then putStrLn "You win!"
-    else standartMode word (n - 1) lengthOfWord
+    else standardMode word (n - 1) lengthOfWord
 
 easyMode :: String -> Int -> Int -> [Char] -> [Int] -> IO ()
 easyMode [] _ _ _ _ = do
